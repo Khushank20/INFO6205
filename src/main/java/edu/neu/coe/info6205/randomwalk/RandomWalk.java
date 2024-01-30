@@ -73,17 +73,17 @@ public class RandomWalk {
     }
 
     public static void main(String[] args) {
-        int[] steps = {5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80};
-        int n = 60;
-        double totalDistance = 0;
-
-        for (int m : steps) {
-
-            for (int i = 0; i < n; i++) {
-
-                totalDistance = randomWalkMulti(m, n);
-            }
-            System.out.println(m + " steps: " + totalDistance + " over " + n + " experiments");
+//        int[] steps = {5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80};
+//        int n = 60;
+//        double totalDistance = 0;
+//
+//        for (int m : steps) {
+//
+//            for (int i = 0; i < n; i++) {
+//
+//                totalDistance = randomWalkMulti(m, n);
+//            }
+//            System.out.println(m + " steps: " + totalDistance + " over " + n + " experiments");
         }
     }
-}
+//}

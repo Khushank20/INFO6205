@@ -15,6 +15,7 @@ import java.util.List;
 public class ThreeSumQuadratic implements ThreeSum {
     /**
      * Construct a ThreeSumQuadratic on a.
+     *
      * @param a a sorted array.
      */
     public ThreeSumQuadratic(int[] a) {
@@ -37,22 +38,25 @@ public class ThreeSumQuadratic implements ThreeSum {
      */
     public List<Triple> getTriples(int j) {
         List<Triple> triples = new ArrayList<>();
-        // TO BE IMPLEMENTED  : for each candidate, test if a[i] + a[j] + a[k] = 0.
+        int left = 0;
+        int right = a.length - 1;
 
+        while (left < j && right > j) {
+            int sum = a[left] + a[j] + a[right];
 
+            if (sum == 0) {
+                Triple triple = new Triple(a[left], a[j], a[right]);
+                triples.add(triple);
+                right--;
+                left++;
+            } else if (sum > 0) {
+                right--;
+            } else {
+                left++;
+            }
+        }
 
-
-
-
-
-
-
-
-
-
-
-
-throw new RuntimeException("implementation missing");
+        return triples;
     }
 
     private final int[] a;
