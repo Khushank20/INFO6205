@@ -8,6 +8,8 @@
 package edu.neu.coe.info6205.union_find;
 
 import java.util.Arrays;
+import java.util.Random;
+import java.util.Scanner;
 
 /**
  * Height-weighted Quick Union with Path Compression
@@ -81,13 +83,14 @@ public class UF_HWQUPC implements UF {
     public int find(int p) {
         validate(p);
         int root = p;
-        // TO BE IMPLEMENTED 
-
-
-
-
-
-throw new RuntimeException("implementation missing");
+        // TO BE IMPLEMENTED
+        while (root != getParent(root)) {
+            if (pathCompression) {
+                doPathCompression(root);
+            }
+            root = getParent(root);
+        }
+        return root;
     }
 
     /**
@@ -115,6 +118,12 @@ throw new RuntimeException("implementation missing");
      */
     public void union(int p, int q) {
         // CONSIDER can we avoid doing find again?
+
+       /*
+       To prevent finding the data again, we must continue to store it, which requires traversing the whole dataset.
+       This yields O(n) time complexity. Using find twice here yields results in O(2 log n).
+        */
+
         mergeComponents(find(p), find(q));
         count--;
     }
@@ -135,10 +144,7 @@ throw new RuntimeException("implementation missing");
 
     @Override
     public String toString() {
-        return "UF_HWQUPC:" + "\n  count: " + count +
-                "\n  path compression? " + pathCompression +
-                "\n  parents: " + Arrays.toString(parent) +
-                "\n  heights: " + Arrays.toString(height);
+        return "UF_HWQUPC:" + "\n  count: " + count + "\n  path compression? " + pathCompression + "\n  parents: " + Arrays.toString(parent) + "\n  heights: " + Arrays.toString(height);
     }
 
     // validate that p is a valid index
@@ -174,13 +180,16 @@ throw new RuntimeException("implementation missing");
 
     private void mergeComponents(int i, int j) {
         // TO BE IMPLEMENTED  make shorter root point to taller one
-
-
-
-
-
-
-
+        if(i == j)
+            return;
+        if(height[i] < height[j]) {
+            updateParent(i, j);
+        } else if(height[i] > height[j]) {
+            updateParent(j, i);
+        } else {
+            updateParent(j, i);
+            height[i]++;
+        }
         // SKELETON
         // END SOLUTION
     }
@@ -190,8 +199,8 @@ throw new RuntimeException("implementation missing");
      */
     private void doPathCompression(int i) {
         // TO BE IMPLEMENTED  update parent to value of grandparent
-
-        // SKELETON
-        // END SOLUTION
+        if (parent[i] != i) {
+            parent[i] = find(parent[i]);
+        }
     }
 }
